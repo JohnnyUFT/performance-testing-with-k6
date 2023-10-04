@@ -18,3 +18,8 @@
 - `docker-compose run k6 cloud /tests/01-simple/test.js` to run the test in the cloud
 
 Look through the k6 docs here: https://support.loadimpact.com/4.0/
+
+
+1. Instalar [git](https://www.atlassian.com/git/tutorials/install-git) na máquina e configurar as credenciais;
+2. Instalar o [docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-22-04) e [docker compose](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04);
+3. 

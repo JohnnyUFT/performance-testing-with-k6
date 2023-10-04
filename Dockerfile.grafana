@@ -1,13 +1,13 @@
-FROM grafana/grafana:8.2.6
+FROM grafana/grafana:9.4.7
 
 USER root
 
-RUN apt-get update && apt-get -y install curl
+RUN apk update && apk add curl
 
 
 # Change the default data directory (otherwise grafana.db won't persist)
 RUN mkdir /var/lib/grafanadb
-ENV GF_PATHS_DATA /var/lib/grafanadb
+ENV GF_PATHS_DATA /var/lib/grafana
 
 # Init Grafana sqlite db and preconfigure our data source to be our influxdb k6 db
 RUN bash -c '/run.sh & sleep 15 && curl -s -H "Content-Type: application/json" -X POST \

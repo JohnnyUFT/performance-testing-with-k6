@@ -13,17 +13,53 @@ services:
     links:
       - influxdb
     environment:
-      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_BASIC_ENABLED=false
+      - GF_AUTH_ANONYMOUS_ALLOW_SIGN_UP=false
+      - GF_AUTH_ANONYMOUS_ALLOW_ORG_CREATE=false
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+      - GF_AUTH_DISABLE_SIGNOUT_MENU=true
+      - GF_AUTH_PROXY_ENABLED=false
+      - GF_SERVER_HTTP_PORT=3000
+      - GF_SERVER_DOMAIN=grafana-server
+      - GF_AUTH_ANONYMOUS_ORG_NAME=Main Org.
+      - GF_DATABASE_TYPE=sqlite3
+      - GF_DATABASE_PATH=/var/lib/grafana/grafana.db
+      - GF_LOG_MODE=console file
+      - GF_USERS_DEFAULT_THEME=light
+      - GF_USERS_DEFAULT_HOME_DASHBOARD_ID=1
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-simple-json-datasource
+      - GF_DATASOURCE_JSON_DATA={'name':'k6','type':'influxdb-server','access':'proxy','url':'http://influxdb:8086','database':'k6','basicAuth':false}
+      - GF_PANELS_DISABLE_SANITIZE_HTML=true
+      - GF_PATHS_DATA=/var/lib/grafana
+      - GF_PATHS_LOGS=/var/log/grafana
+      - GF_PATHS_PLUGINS=/var/lib/grafana/plugins
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+      # - GF_SMTP_ENABLED=false
+      # - GF_SMTP_FROM_ADDRESS=grafana@localhost
+      # - GF_SMTP_FROM_NAME=Grafana
+      # - GF_SMTP_HOST=localhost:25
+      # - GF_SMTP_SKIP_VERIFY=false
+      # - GF_SMTP_TLS_SKIP_VERIFY_insecure=true
+      # - GF_SMTP_TO_ADDRESS=
+      # - GF_SMTP_TO_NAME=
+      # - GF_SMTP_USER=
+      # - GF_SMTP_PASSWORD=
+
     ports:
       - "3000:3000"
+    volumes:
+      - ./grafana_dashboard_new.json:/etc/grafana/provisioning/dashboards/k6_dashboard.json
   k6:
     build: .
     ports:
       - "6565:6565"
     volumes:
       - "./tests:/tests"
+      - "./results:/results"
     environment:
       - K6_OUT=influxdb=http://influxdb:8086/k6
     command: "version"

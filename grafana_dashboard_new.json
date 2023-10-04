@@ -1,0 +1,196 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": "-- Grafana --",
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": null,
+    "links": [],
+    "panels": [
+        {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": "k6",
+            "fieldConfig": {
+                "defaults": {
+                    "custom": {},
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "#EAB839",
+                                "value": 300
+                            },
+                            {
+                                "color": "red",
+                                "value": 400
+                            }
+                        ]
+                    },
+                    "unit": "ms"
+                },
+                "overrides": []
+            },
+            "fill": 1,
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 0,
+                "y": 0
+            },
+            "id": 2,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": true,
+                "hideEmpty": false,
+                "hideZero": false,
+                "max": true,
+                "min": true,
+                "rightSide": true,
+                "show": true,
+                "sort": "current",
+                "total": false,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "mean",
+                        "last",
+                        "max",
+                        "min",
+                        "sum"
+                    ]
+                },
+                "fields": "",
+                "values": false
+            },
+            "pluginVersion": "7.5.7",
+            "targets": [
+                {
+                    "bucketAggs": [
+                        {
+                            "field": "@timestamp",
+                            "interval": "10s",
+                            "type": "date_histogram"
+                        },
+                        {
+                            "bucketSize": 1,
+                            "field": "tags.status_code",
+                            "type": "terms"
+                        },
+                        {
+                            "bucketSize": 1,
+                            "field": "tags.url",
+                            "type": "terms"
+                        }
+                    ],
+                    "metrics": [
+                        {
+                            "field": "value",
+                            "type": "avg"
+                        }
+                    ],
+                    "refId": "A",
+                    "timeField": "@timestamp",
+                    "type": "table",
+                    "pluginVersion": "7.5.7",
+                    "targets": [
+                        {
+                            "bucketAggs": [
+                                {
+                                    "field": "@timestamp",
+                                    "interval": "10s",
+                                    "type": "date_histogram"
+                                },
+                                {
+                                    "bucketSize": 1,
+                                    "field": "tags.status_code",
+                                    "type": "terms"
+                                },
+                                {
+                                    "bucketSize": 1,
+                                    "field": "tags.url",
+                                    "type": "terms"
+                                }
+                            ],
+                            "metrics": [
+                                {
+                                    "field": "value",
+                                    "type": "avg"
+                                }
+                            ],
+                            "refId": "A",
+                            "timeField": "@timestamp",
+                            "type": "table"
+                        }
+                    ],
+                    "title": "Response time percentile",
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "version": 1
+                }
+            ],
+            "refresh": "30s",
+            "schemaVersion": 27,
+            "style": "dark",
+            "tags": [],
+            "templating": {
+                "list": []
+            },
+            "time": {
+                "from": "now-1h",
+                "to": "now"
+            },
+            "timepicker": {},
+            "timezone": "",
+            "title": "K6 Performance Testing Dashboard",
+            "uid": "K6-Performance-Testing-Dashboard",
+            "version": 1
+        }
+    ],
+    "folder": {
+        "id": null,
+        "uid": null,
+        "title": "K6 Performance Testing",
+        "url": "",
+        "hasAcl": false,
+        "canSave": true,
+        "canEdit": true,
+        "canAdmin": true,
+        "type": "dash-folder",
+        "tags": [],
+        "version": 1,
+        "createdBy": "admin",
+        "created": "2022-04-01T14:16:23.562407401Z",
+        "updatedBy": "admin",
+        "updated": "2022-04-01T14:16:23.562407401Z",
+        "acl": [],
+        "parentId": 0
+    },
+    "overwrite": false
+}
